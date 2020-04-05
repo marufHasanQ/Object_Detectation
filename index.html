@@ -1,0 +1,80 @@
+<html>
+
+<head>
+  <title>What's In That Image?</title>
+  <meta charset="UTF-8" />
+  <!-- Load TensorFlow.js. This is required to use MobileNet. -->
+  <script src="https://unpkg.com/@tensorflow/tfjs@0.10.3"></script>
+  <!-- Load the MobileNet model. -->
+  <script src="https://unpkg.com/@tensorflow-models/mobilenet@0.0.1"></script>
+</head>
+
+<body onload="setup()">
+  <div style="text-align:center">
+    <h1>
+      What's In That Image?
+    </h1>
+    <video id="video">Video stream not available.</video>
+    <pre id="predictions"></pre>
+    <canvas id="canvas" style="display:none"></canvas>
+  </div>
+
+</body>
+
+</html>
+
+function setup() {
+  let video = document.getElementById("video");
+  let canvas = document.getElementById("canvas");
+  let pre = document.getElementById("predictions");
+  let model = null;
+
+  async function startCamera() {
+    let stream = await navigator.mediaDevices.getUserMedia({ video: true });
+    video.srcObject = stream;
+    await video.play();
+
+    setInterval(() => takeSnapshot(), 1000);
+  }
+
+  function takeSnapshot() {
+    let context = canvas.getContext("2d"),
+      width = video.videoWidth,
+      height = video.videoHeight;
+
+    if (width && height) {
+      // Setup a canvas with the same dimensions as the video.
+      canvas.width = width;
+      canvas.height = height;
+
+      // Make a copy of the current frame in the video on the canvas.
+      context.drawImage(video, 0, 0, width, height);
+
+      classifyImage();
+    }
+  }
+
+  async function classifyImage() {
+    predictions = await model.classify(canvas);
+    displayPredictions(predictions);
+  }
+
+  function displayPredictions(predictions) {
+    let val = "";
+
+    for (prediction of predictions) {
+      let perc = (prediction.probability * 100).toFixed(2);
+      val += `${perc}% | ${prediction.className}\n`;
+      console.log(val);
+    }
+    pre.innerHTML = val;
+  }
+
+  async function main() {
+    model = await mobilenet.load();
+    await startCamera();
+  }
+  main();
+}
+
+

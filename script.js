@@ -6,15 +6,25 @@ function setup() {
 
   async function startCamera() {
     try {
-      throw new Error("Whoops!");
+      
        let stream = await navigator.mediaDevices.getUserMedia({ video: true });
   } catch(err) {
     alert(err); // TypeError: failed to fetch
   }
+    if ("srcObject" in videoPlayer) {
+      video.srcObject = stream;
+      console.log("src object");
+    } else {
+      console.log("no src object");
+    }
     
+    try {
+      await video.play();
+       
+  } catch(err) {
+    alert(err); 
+  }
     
-    video.srcObject = stream;
-    await video.play();
 
     setInterval(() => takeSnapshot(), 1000);
   }

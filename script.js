@@ -5,7 +5,14 @@ function setup() {
   let model = null;
 
   async function startCamera() {
-    let stream = await navigator.mediaDevices.getUserMedia({ video: true });
+    try {
+      throw new Error("Whoops!");
+       let stream = await navigator.mediaDevices.getUserMedia({ video: true });
+  } catch(err) {
+    alert(err); // TypeError: failed to fetch
+  }
+    
+    
     video.srcObject = stream;
     await video.play();
 

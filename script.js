@@ -3,11 +3,12 @@ function setup() {
   let canvas = document.getElementById("canvas");
   let pre = document.getElementById("predictions");
   let model = null;
+  let stream;
 
   async function startCamera() {
     try {
       
-       let stream = await navigator.mediaDevices.getUserMedia({ video: true });
+        stream = await navigator.mediaDevices.getUserMedia({ video: true });
   } catch(err) {
     alert(err); // TypeError: failed to fetch
   }

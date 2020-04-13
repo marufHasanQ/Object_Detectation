@@ -11,7 +11,7 @@ function setup() {
   } catch(err) {
     alert(err); // TypeError: failed to fetch
   }
-    if ("srcObject" in videoPlayer) {
+    if ("srcObject" in video) {
       video.srcObject = stream;
       console.log("src object");
     } else {

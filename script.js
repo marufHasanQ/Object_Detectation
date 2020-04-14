@@ -23,7 +23,7 @@ function setup() {
       await video.play();
        
   } catch(err) {
-    alert(err); 
+    console.log(err);
   }
     
 
@@ -58,14 +58,19 @@ function setup() {
     for (prediction of predictions) {
       let perc = (prediction.probability * 100).toFixed(2);
       val += `${perc}% | ${prediction.className}\n`;
-      console.log(val);
+      
     }
     pre.innerHTML = val;
   }
 
   async function main() {
-    model = await mobilenet.load();
-    await startCamera();
+    
+    model = await mobilenet.load().catch(err) {
+    console.log("problem loading model, err: "+err);
+      
+    await startCamera();  
+    };
+    
   }
   main();
 }

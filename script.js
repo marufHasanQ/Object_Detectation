@@ -9,8 +9,9 @@ function setup() {
     try {
       
         stream = await navigator.mediaDevices.getUserMedia({ video: true });
+        console.log("mediaDevices");
   } catch(err) {
-    alert(err); // TypeError: failed to fetch
+    console.log("mediaDevices error"+err); // TypeError: failed to fetch
   }
     if ("srcObject" in video) {
       video.srcObject = stream;
@@ -62,10 +63,10 @@ function setup() {
     }
     pre.innerHTML = val;
   }
-async function main() {
+
+  async function main() {
     
-    model = await mobilenet.load().catch(err) (
-    console.log("problem loading model, err: "+err));
+    model = await mobilenet.load();
       
     await startCamera();  
     

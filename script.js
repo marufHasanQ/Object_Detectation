@@ -22,8 +22,8 @@ function setup() {
     
     try {
       await video.play();
-       
-  } catch(err) {
+    } catch(err) {
+      
     console.log(err);
   }
     
@@ -44,7 +44,7 @@ function setup() {
       // Make a copy of the current frame in the video on the canvas.
       context.drawImage(video, 0, 0, width, height);
 
-      classifyImage();
+      //classifyImage();
     }
   }
 
@@ -65,9 +65,17 @@ function setup() {
   }
 
   async function main() {
-    
-    model = await mobilenet.load();
+  //   try {
+  //     model = await mobilenet.load();
       
+  // } catch (e) {
+  //     console.log("model is not loading"+e);
+
+  // }
+  // finally{
+  //   console.log("it loaded")
+  // }
+    console.log("new")
     await startCamera();  
     
     

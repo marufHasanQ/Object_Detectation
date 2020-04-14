@@ -62,14 +62,13 @@ function setup() {
     }
     pre.innerHTML = val;
   }
-
-  async function main() {
+async function main() {
     
-    model = await mobilenet.load().catch(err) {
-    console.log("problem loading model, err: "+err);
+    model = await mobilenet.load().catch(err) (
+    console.log("problem loading model, err: "+err));
       
     await startCamera();  
-    };
+    
     
   }
   main();

@@ -1,35 +1,45 @@
 <!DOCTYPE html>
-<html lang="en" >
-<head>
-  
-  <meta charset="UTF-8">
-  <title>CodePen - Tensorflow.js MobileNet Demo</title>
-  
 
-</head>
-<body>
+
+
 <!-- partial:index.partial.html -->
-<html>
+
 
 <head>
-  <title>What's In That Image?</title>
+  <script  src="./script.js"></script>
+  
   <meta charset="UTF-8" />
   <!-- Load TensorFlow.js. This is required to use MobileNet. -->
-  <script  src="./script.js"></script>
   <script src="https://unpkg.com/@tensorflow/tfjs@0.10.3"></script>
   <!-- Load the MobileNet model. -->
   <script src="https://unpkg.com/@tensorflow-models/mobilenet@0.0.1"></script>
+  <title>What's In That Image?</title>
 </head>
 
 <body onload="setup()">
   <div style="text-align:center">
-    <h1>
-      What's In That Image?
+        <h1>
+      What's in That  Image?
     </h1>
-    <video id="video">Video stream not available.</video>
-    <pre id="predictions"></pre>
-    <canvas id="canvas" style="display:none"></canvas>
+    <pre id="loadPre">Model loading....</pre>
+    <div>
+      <button onclick="startCamera()">Start Camera
+      </button>
+      <button onclick="loadModel()">load model
+      </button>  
+      <button id="predictButton" onclick="predictToggle()">Start Predicting
+
+      </button>
+    </div>
+    <div><video id="video">Video stream not available.</video>
+    
+      <canvas id="canvas" >
+      </canvas>
+    </div>
+    
+    <pre id="predictions">Predictions</pre>
   </div>
+
 
 </body>
 
@@ -37,5 +47,3 @@
 <!-- partial -->
   
 
-</body>
-</html>

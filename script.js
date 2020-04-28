@@ -6,7 +6,8 @@ let video ;
   let stream;
   let predict=false;
   let loadPre;
-
+  let wikipages;
+let imageUpload;
 function setup() {
    video = document.getElementById("video");
    canvas = document.getElementById("canvas");
@@ -14,6 +15,10 @@ function setup() {
    model = null;
    video = document.getElementById("video");
  loadPre = document.getElementById("loadPre");
+  wikipages=document.getElementById("wikipages");
+  imageUpload=document.getElementById("imageUpload").addEventListener('change',handleImageUpload, false);;
+  
+  
  
 
 
@@ -37,6 +42,7 @@ function setup() {
   mobilenet.load()
   .then((result)=>{model=result;
     loadPre.innerHTML='model loaded';
+                   
   })
   .catch ((e)=>{
     loadPre.innerHTML='Model failed to load';
@@ -50,9 +56,10 @@ function setup() {
     
   }
   main();
+  
 }
 async function loadModel(){
-  loadPre.innerHTML='Model loading...';
+  loadPre.innerHTML='Model loading...again';
   mobilenet.load()
   .then((result)=>{model=result;
     loadPre.innerHTML='model loaded';
@@ -67,11 +74,14 @@ async function loadModel(){
 }
 
 async function classifyImage() {
+  
   predictions = await model.classify(canvas);
   displayPredictions(predictions);
 }
 
 function displayPredictions(predictions) {
+ //window.alert(predictions[0].className); 
+
   let val = "";
 
   for (prediction of predictions) {
@@ -79,9 +89,28 @@ function displayPredictions(predictions) {
     val += `${perc}% | ${prediction.className}\n`;
     
   }
+  
   pre.innerHTML = val;
 }
-
+ async function handleImageUpload(e){
+    var reader = new FileReader();
+  reader.readAsDataURL(e.target.files[0]);
+    reader.onload = function(event){
+      let context = canvas.getContext("2d");
+        var img = new Image();
+        img.onload = function(){
+            canvas.width = img.width;
+            canvas.height = img.height;
+            context.drawImage(img,0,0);
+        }
+        img.src = event.target.result;
+    }
+   const r = await model.classify(canvas);
+  console.log(r);
+  
+  classifyImage();
+         
+}
 function takeSnapshot() {
   let context = canvas.getContext("2d"),
     width = video.videoWidth,
@@ -97,11 +126,23 @@ function takeSnapshot() {
     if(predict){
       classifyImage();
     }
+      
+    
     
   }
 }
 
+function showDetails(){
+    
+   let a =predictions[0].className;
+  //window.alert(a);
 
+let b=a.split(',');let c=b[0].charAt(0).toUpperCase()+b[0].slice(1).replace(' ','_');
+
+  wikipages.src="https://en.wikipedia.org/wiki/"+c;
+  
+  
+}
 
 function predictToggle(){
   predict=!predict;

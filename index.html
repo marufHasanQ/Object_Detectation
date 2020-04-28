@@ -13,15 +13,15 @@
   <script src="https://unpkg.com/@tensorflow/tfjs@0.10.3"></script>
   <!-- Load the MobileNet model. -->
   <script src="https://unpkg.com/@tensorflow-models/mobilenet@0.0.1"></script>
-  <title>What's In That Image?</title>
+  <title>Object Identification</title>
 </head>
 
 <body onload="setup()">
   <div style="text-align:center">
         <h1>
-      What's in That  Image?
+      Object Identification
     </h1>
-    <pre id="loadPre">Model loading....</pre>
+    <pre id="loadPre">Model loading...</pre>
     <div>
       <button onclick="startCamera()">Start Camera
       </button>
@@ -30,8 +30,9 @@
       <button id="predictButton" onclick="predictToggle()">Start Predicting
 
       </button>
+      <input id="imageUpload" type="file" />
     </div>
-    <div><video id="video">Video stream not available.</video>
+    <div><video id="video">Video stream notavailable.</video>
     
       <canvas id="canvas" >
       </canvas>
@@ -39,8 +40,9 @@
     
     <pre id="predictions">Predictions</pre>
   </div>
-
-
+<button onclick="showDetails()">Show Details
+      </button>
+<iframe id="wikipages"  height="551" width="705"></iframe>
 </body>
 
 </html>

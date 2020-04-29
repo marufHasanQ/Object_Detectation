@@ -1,51 +1,122 @@
 <!DOCTYPE html>
 
-
-
 <!-- partial:index.partial.html -->
 
-
 <head>
-  <script  src="./script.js"></script>
-  
+  <script src="./script.js"></script>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    .first {
+      background-color: grey;
+      grid-area: first;
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+    }
+
+    #loadPre {
+      text-align: center;
+
+      grid-column-start: 3;
+      grid-column-end: 4;
+    }
+
+    .main-head {
+      grid-area: header;
+      background-color: blue;
+    }
+
+    .content {
+      grid-area: content;
+      background-color: pink;
+    }
+
+    .main-nav {
+      grid-area: nav;
+    }
+
+    #startCamera {
+      grid-row-start: 2;
+    }
+
+    #imageUpload {
+      grid-row-start: 1;
+    }
+
+    .side {
+      display: grid;
+      grid-template-rows: repeat(4, 1fr);
+      background-color: yellow;
+      grid-area: sidebar;
+    }
+
+    .result {
+      grid-area: result;
+      background-color: green;
+    }
+
+    .wrapper {
+      font: 1.2em Helvetica, arial, sans-serif;
+      display: grid;
+      grid-template-columns: 1fr 3fr;
+      grid-template-areas:
+        "header header"
+        "first first "
+        "sidebar content"
+        "result result";
+    }
+  </style>
+
   <meta charset="UTF-8" />
   <!-- Load TensorFlow.js. This is required to use MobileNet. -->
-  <script src="https://unpkg.com/@tensorflow/tfjs@0.10.3"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.0.1"> </script>
   <!-- Load the MobileNet model. -->
-  <script src="https://unpkg.com/@tensorflow-models/mobilenet@0.0.1"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet@1.0.0"> </script>
   <title>Object Identification</title>
 </head>
 
 <body onload="setup()">
-  <div style="text-align:center">
-        <h1>
-      Object Identification
-    </h1>
-    <pre id="loadPre">Model loading...</pre>
-    <div>
-      <button onclick="startCamera()">Start Camera
-      </button>
+  <div style="text-align:center" class="wrapper">
+    <div class="main-head">
+      <h1>
+        বস্তু চিহ্নিতকরণ
+      </h1>
+    </div>
+    <div class="first" id="first">
+      <pre id="loadPre">
+      মডেল লোড হচ্ছে... 
+      </pre>
       <button onclick="loadModel()">load model
-      </button>  
-      <button id="predictButton" onclick="predictToggle()">Start Predicting
-
       </button>
+    </div>
+    <div class="side">
+      <button id="startCamera" onclick="startCamera()">Start Camera
+      </button>
+
       <input id="imageUpload" type="file" />
     </div>
-    <div><video id="video">Video stream notavailable.</video>
-    
-      <canvas id="canvas" >
+
+    <div class="content"><video id="video">Video stream not available.</video>
+
+      <canvas id="canvas">
       </canvas>
     </div>
-    
-    <pre id="predictions">Predictions</pre>
-  </div>
-<button onclick="showDetails()">Show Details
+    <div class="result">
+      <button id="predictButton" onclick="predictToggle()">Start Predicting </button>
+      <pre id="predictions">Predictions</pre>
+      <button onclick="showDetails()">Show Details
       </button>
-<iframe id="wikipages"  height="551" width="705"></iframe>
+      <button onclick="speakPrediction() "> Speak
+      </button>
+
+    </div>
+
+  </div>
+  <iframe id="wikipages"></iframe>
 </body>
 
 </html>
 <!-- partial -->
-  
-

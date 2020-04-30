@@ -9,7 +9,8 @@ let loadPre;
 let wikipages;
 let imageUpload;
 let smallCanvas;
-
+let autoImage;
+let count = 0;
 function setup() {
   video = document.getElementById("video");
   canvas = document.getElementById("canvas");
@@ -18,12 +19,18 @@ function setup() {
   video = document.getElementById("video");
   loadPre = document.getElementById("loadPre");
   wikipages = document.getElementById("wikipages");
+  autoImage = document.getElementById("autoImage");
 
   imageUpload = document
     .getElementById("imageUpload")
     .addEventListener("change", handleImageUpload, false);
 
   async function main() {
+    console.log(
+      "does responsiveVoice loaded: " + (responsiveVoice ? true : false)
+    );
+    console.log("does tensorflowjs loaded: " + (tf ? true : false));
+
     //   try {
     //     model = await mobilenet.load();
 
@@ -51,6 +58,7 @@ function setup() {
       });
   }
   main();
+  setInterval(() => autoImageUploader(), 10000);
 }
 async function loadModel() {
   loadPre.innerHTML = "Model loading...again";
@@ -66,8 +74,10 @@ async function loadModel() {
     });
 }
 
-async function classifyImage() {
-  predictions = await model.classify(canvas);
+async function classifyImage(imgObject) {
+  console.log("inside classify " + imgObject.src);
+  predictions = await model.classify(imgObject);
+  console.log("inside classify " + predictions);
   displayPredictions(predictions);
 }
 
@@ -82,19 +92,46 @@ function displayPredictions(predictions) {
   }
 
   pre.innerHTML = val;
+  speakPrediction(predictions[0].className);
 }
 
-function speakPrediction() {
-  let voiceSpeaker;
-  speechSynthesis.getVoices().forEach(function (voice, index) {
-    console.log(voice.name);
-    if (voice.name == "Google हिन्दी") {
-      console.log("y");
-    }
-    voiceSpeaker = voice;
-  });
+function speakPrediction(speaking_word) {
+  if (model == undefined) {
+    responsiveVoice.speak("Hello");
+    console.log("working");
+    return 0;
+  }
+  if (speaking_word == undefined) {
+    responsiveVoice.speak("start predicting first");
+    return 0;
+    // console.log(speaking_word);
+  }
+
+  responsiveVoice.speak(speaking_word);
+
+  // speechSynthesis.getVoices().forEach(function (voice, index) {
+  //   console.log(voice.name);
+  //   if (voice.name == "Google हिन्दी") {
+  //     console.log("y");
+  //   }
+  //   voiceSpeaker = voice;
+  // });
 }
 
+function autoImageUploader() {
+  count++;
+  if (count > 5) {
+    return;
+  }
+
+  console.log(autoImage.src);
+  if (autoImage.src == "https://picsum.photos/500/500/?random") {
+    autoImage.src = "https://loremflickr.com/320/240";
+  } else {
+    autoImage.src = "https://picsum.photos/500/500/?random" + Math.random();
+  }
+  classifyImage(autoImage);
+}
 async function handleImageUpload(e) {
   var reader = new FileReader();
   reader.readAsDataURL(e.target.files[0]);
@@ -126,7 +163,7 @@ function takeSnapshot() {
     // Make a copy of the current frame in the video on the canvas.
     context.drawImage(video, 0, 0, width, height);
     if (predict) {
-      classifyImage();
+      classifyImage(canvas);
     }
   }
 }

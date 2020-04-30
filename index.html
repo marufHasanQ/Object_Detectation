@@ -4,8 +4,15 @@
 
 <head>
   <script src="./script.js"></script>
+  
 
-  <style>
+  <meta charset="UTF-8" />
+  <!-- Load TensorFlow.js. This is required to use MobileNet. -->
+  <script src='https://code.responsivevoice.org/responsivevoice.js'></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.0.1"> </script>
+  <!-- Load the MobileNet model. -->
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet@1.0.0"> </script>
+   <style>
     * {
       box-sizing: border-box;
     }
@@ -69,12 +76,6 @@
         "result result";
     }
   </style>
-
-  <meta charset="UTF-8" />
-  <!-- Load TensorFlow.js. This is required to use MobileNet. -->
-  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.0.1"> </script>
-  <!-- Load the MobileNet model. -->
-  <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet@1.0.0"> </script>
   <title>Object Identification</title>
 </head>
 
@@ -93,13 +94,16 @@
       </button>
     </div>
     <div class="side">
-      <button id="startCamera" onclick="startCamera()">Start Camera
+      <button id="startCamera" onclick="startCamera()"> Start Camera
       </button>
 
       <input id="imageUpload" type="file" />
     </div>
 
-    <div class="content"><video id="video">Video stream not available.</video>
+    <div class="content">
+      <img id="autoImage" width="100%" src="https://picsum.photos/500/500/?random" onclick="autoImageUploader()">
+
+      <video id="video">Video stream not available.</video>
 
       <canvas id="canvas">
       </canvas>

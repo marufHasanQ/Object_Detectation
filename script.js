@@ -11,6 +11,7 @@ let imageUpload;
 let smallCanvas;
 let autoImage;
 let count = 0;
+//let img = [];
 function setup() {
   video = document.getElementById("video");
   canvas = document.getElementById("canvas");
@@ -20,6 +21,7 @@ function setup() {
   loadPre = document.getElementById("loadPre");
   wikipages = document.getElementById("wikipages");
   autoImage = document.getElementById("autoImage");
+  console.log(autoImage);
 
   imageUpload = document
     .getElementById("imageUpload")
@@ -58,7 +60,7 @@ function setup() {
       });
   }
   main();
-  setInterval(() => autoImageUploader(), 10000);
+  setInterval(() => autoImageUploader(), 12000);
 }
 async function loadModel() {
   loadPre.innerHTML = "Model loading...again";
@@ -118,19 +120,42 @@ function speakPrediction(speaking_word) {
   // });
 }
 
-function autoImageUploader() {
+async function autoImageUploader(e) {
   count++;
-  if (count > 5) {
-    return;
-  }
+  // if (count > 10) {
+  //   return;
+  // }
 
-  console.log(autoImage.src);
-  if (autoImage.src == "https://picsum.photos/500/500/?random") {
-    autoImage.src = "https://loremflickr.com/320/240";
-  } else {
-    autoImage.src = "https://picsum.photos/500/500/?random" + Math.random();
-  }
+  //   if (autoImage.src == "https://picsum.photos/500/500/?random") {
+  //     autoImage.src = "https://loremflickr.com/320/240";
+  //   } else {
+
+  //   }
+  autoImage.src = "https://picsum.photos/id/" + (count + 1050) + "/500";
+  //   autoImage.setAttribute("crossOrigin", "anonymous");
+
+  //   setTimeout(() => {}, 2000);
+
+  //   let img = new Image();
+  //   //img.crossOrigin = "anonymous";
+  // img.src = "https://picsum.photos/200/300"; //"https://i.picsum.photos/id/44/200/300.jpg";
+
+  //   // "https://i.picsum.photos/id/88" + "/200/300.jpg";
+  //   img.width = 224;
+  //   img.height = 224;
+  //   //console.log(autoImage.src);
+  console.log(autoImage.src + count);
   classifyImage(autoImage);
+  // t = autoImage;
+  // const r = await model.classify(t);
+  //console.info("from auto load" + r);
+  console.info(r);
+  delete t;
+
+  // setTimeout(
+  //   model.classify(autoImage).then((r) => console.log(r)),
+  //   3000
+  // );
 }
 async function handleImageUpload(e) {
   var reader = new FileReader();
@@ -148,7 +173,7 @@ async function handleImageUpload(e) {
   const r = await model.classify(canvas);
   console.log(r);
 
-  classifyImage();
+  classifyImage(canvas);
 }
 function takeSnapshot() {
   let context = canvas.getContext("2d"),

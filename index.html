@@ -4,7 +4,6 @@
 
 <head>
   <script src="./script.js"></script>
-  
 
   <meta charset="UTF-8" />
   <!-- Load TensorFlow.js. This is required to use MobileNet. -->
@@ -12,10 +11,22 @@
   <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.0.1"> </script>
   <!-- Load the MobileNet model. -->
   <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet@1.0.0"> </script>
-   <style>
+  <title>Object Identification</title>
+
+ <style>
     * {
       box-sizing: border-box;
     }
+button{
+  background-color: transparent;
+  color:white;
+}
+body {
+  font-family:Helvetica,Arial,sans-serif;
+   background: url(https://wpamelia.com/wp-content/uploads/2019/02/background-black-colors-952670.jpg) repeat;
+  
+  color:#fff;
+}
 
     .first {
       background-color: grey;
@@ -30,53 +41,73 @@
       grid-column-start: 3;
       grid-column-end: 4;
     }
+#autoImage{
+   
+    
+    margin: 10% auto;
+  width:80%;
+  height:30%;
+  border: 7px solid white;
+  
+  border-radius: 15px;
+     
 
+     
+  
+}
     .main-head {
       grid-area: header;
-      background-color: blue;
+      background-color:#1e1f26;
     }
 
     .content {
+      
+    
+     
       grid-area: content;
-      background-color: pink;
+      
+     
+      
     }
 
     .main-nav {
       grid-area: nav;
     }
 
-    #startCamera {
+/*     #startCamera {
       grid-row-start: 2;
     }
 
     #imageUpload {
       grid-row-start: 1;
-    }
+    } */
 
-    .side {
-      display: grid;
-      grid-template-rows: repeat(4, 1fr);
-      background-color: yellow;
-      grid-area: sidebar;
-    }
+   .side {
+     background-color:red;
+/*       display: grid;
+      grid-template-rows: repeat(1o, 1fr);
+      grid-template-columns:auto; 
+     
+      grid-area: sidebar; */
+    } 
 
     .result {
       grid-area: result;
-      background-color: green;
+      
     }
 
     .wrapper {
+     
       font: 1.2em Helvetica, arial, sans-serif;
       display: grid;
-      grid-template-columns: 1fr 3fr;
+      grid-template-columns: 1fr 7fr;
       grid-template-areas:
         "header header"
         "first first "
-        "sidebar content"
+        "content content"
         "result result";
     }
   </style>
-  <title>Object Identification</title>
 </head>
 
 <body onload="setup()">
@@ -94,14 +125,14 @@
       </button>
     </div>
     <div class="side">
-      <button id="startCamera" onclick="startCamera()"> Start Camera
+      <button id="startCamera" onclick="startCamera()"> &#x1f4f7;
       </button>
 
       <input id="imageUpload" type="file" />
     </div>
 
     <div class="content">
-      <img id="autoImage" width="100%" src="https://picsum.photos/500/500/?random" onclick="autoImageUploader()">
+      <img id="autoImage" src="https://i.picsum.photos/id/274/500/500.jpg" crossorigin="anonymous" onclick="autoImageUploader()">
 
       <video id="video">Video stream not available.</video>
 
@@ -119,7 +150,7 @@
     </div>
 
   </div>
-  <iframe id="wikipages"></iframe>
+  <iframe id="wikipages" width="100%"></iframe>
 </body>
 
 </html>

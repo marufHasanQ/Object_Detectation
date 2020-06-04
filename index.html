@@ -6,21 +6,53 @@
   <script src="./script.js"></script>
 
   <meta charset="UTF-8" />
+  <link href="https://fonts.googleapis.com/css2?family=Aldrich&family=Amatic+SC:wght@700&family=Audiowide&family=Bungee+Inline&display=swap" rel="stylesheet">
   <!-- Load TensorFlow.js. This is required to use MobileNet. -->
   <script src='https://code.responsivevoice.org/responsivevoice.js'></script>
   <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.0.1"> </script>
   <!-- Load the MobileNet model. -->
   <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet@1.0.0"> </script>
-  <title>Object Identification</title>
-
- <style>
+   <style>
     * {
       box-sizing: border-box;
     }
+
+#mySidenav div{
+  background:blue;
+  
+ position: fixed;
+ 
+  left: -110px;
+  transition: 0.3s;
+  padding: 15px;
+  
+  
+  font-size: 20px;
+  color: white;
+  border-radius: 0 5px 5px 0;
+}
+
+.myFile input[type="file"] {
+  display: none;
+  
+  
+  opacity: 0;
+  font-size: 200px;
+  /* filter: alpha(opacity=0);
+   */
+}
+
+#mySidenav div:hover{
+  background-color: black;
+  left: 0;
+}
 button{
   background-color: transparent;
   color:white;
 }
+
+
+
 body {
   font-family:Helvetica,Arial,sans-serif;
    background: url(https://wpamelia.com/wp-content/uploads/2019/02/background-black-colors-952670.jpg) repeat;
@@ -61,13 +93,8 @@ body {
     }
 
     .content {
-      
-    
-     
       grid-area: content;
-      
-     
-      
+    
     }
 
     .main-nav {
@@ -108,6 +135,7 @@ body {
         "result result";
     }
   </style>
+  <title>Object Identification</title>
 </head>
 
 <body onload="setup()">
@@ -121,14 +149,25 @@ body {
       <pre id="loadPre">
       মডেল লোড হচ্ছে... 
       </pre>
-      <button onclick="loadModel()">load model
+      <button style='font-size:50' onclick="loadModel()">&#128472;
       </button>
     </div>
-    <div class="side">
-      <button id="startCamera" onclick="startCamera()"> &#x1f4f7;
-      </button>
 
-      <input id="imageUpload" type="file" />
+    <div id="mySidenav">
+      <div style=" top:90px;">
+        Open Camera
+        <button id="startCamera" style="float:right;" onclick="startCamera()"> &#x1f4f7;
+        </button>
+      </div>
+      <div style=" top:220px;">
+        <label class="myFile">
+          Upload Images &#128447; <input input id="imageUpload" type="file" />
+        </label>
+
+      </div>
+    </div>
+    <div class="side">
+
     </div>
 
     <div class="content">
@@ -141,16 +180,16 @@ body {
     </div>
     <div class="result">
       <button id="predictButton" onclick="predictToggle()">Start Predicting </button>
-      <pre id="predictions">Predictions</pre>
+      <pre styl="font-family: 'Bungee Inline', cursive; " id="predictions">Predictions</pre>
       <button onclick="showDetails()">Show Details
       </button>
-      <button onclick="speakPrediction() "> Speak
+      <button id="speakButton" onclick="speakingToggle() "> Speak
       </button>
 
     </div>
 
   </div>
-  <iframe id="wikipages" width="100%"></iframe>
+  <iframe id="wikipages" width="100%" height="500px"></iframe>
 </body>
 
 </html>

@@ -10,6 +10,8 @@ let wikipages;
 let imageUpload;
 let smallCanvas;
 let autoImage;
+let speakButton;
+let speakFlag = true;
 let count = 0;
 //let img = [];
 function setup() {
@@ -21,6 +23,8 @@ function setup() {
   loadPre = document.getElementById("loadPre");
   wikipages = document.getElementById("wikipages");
   autoImage = document.getElementById("autoImage");
+  speakButton = document.getElementById("speakButton");
+
   console.log(autoImage);
 
   imageUpload = document
@@ -94,7 +98,24 @@ function displayPredictions(predictions) {
   }
 
   pre.innerHTML = val;
+
   speakPrediction(predictions[0].className);
+}
+function speakingToggle() {
+  if (predictions == undefined) {
+    responsiveVoice.speak("start predicting first");
+    return 0;
+  }
+  console.log("speakButton" + speakButton);
+
+  speakFlag = !speakFlag;
+  if (speakFlag) {
+    responsiveVoice.speak("muting");
+    speakButton.innerHTML = "mute";
+  } else {
+    responsiveVoice.speak("speaking");
+    speakButton.innerHTML = "speak";
+  }
 }
 
 function speakPrediction(speaking_word) {
@@ -103,13 +124,11 @@ function speakPrediction(speaking_word) {
     console.log("working");
     return 0;
   }
-  if (speaking_word == undefined) {
-    responsiveVoice.speak("start predicting first");
-    return 0;
-    // console.log(speaking_word);
-  }
 
-  responsiveVoice.speak(speaking_word);
+  console.log("speakFlag:" + speakFlag);
+  if (speakFlag) {
+    responsiveVoice.speak(speaking_word);
+  }
 
   // speechSynthesis.getVoices().forEach(function (voice, index) {
   //   console.log(voice.name);
@@ -131,7 +150,7 @@ async function autoImageUploader(e) {
   //   } else {
 
   //   }
-  autoImage.src = "https://picsum.photos/id/" + (count + 1050) + "/500";
+  autoImage.src = "https://picsum.photos/id/" + (count + 250) + "/500";
   //   autoImage.setAttribute("crossOrigin", "anonymous");
 
   //   setTimeout(() => {}, 2000);

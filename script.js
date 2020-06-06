@@ -12,8 +12,61 @@ let smallCanvas;
 let autoImage;
 let speakButton;
 let speakFlag = true;
+let autoImageInterval;
+//const startCameraButton;
 let count = 0;
 //let img = [];
+
+function openPage(element) {
+  let tablinks = element;
+
+  let tabcontent = document.getElementsByClassName("content");
+  console.log("tab length" + tabcontent.length);
+  //   document.getElementById('cameraPan').style.backgroundColor = "DodgerBlue";
+  //   document.getElementById('uploadPan').style.backgroundColor = "MediumSeaGreen
+  // ";
+
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+
+  if (tablinks == "cameraPan") {
+    console.log(`hello
+${tablinks}
+
+${tabcontent.length}`);
+
+    clearInterval(autoImageInterval);
+    document.getElementById("video").style.display = "block";
+    document.getElementById("canvas").style.display = "block";
+
+    //    console.log("clicked" + tablinks);
+  } else if (tablinks == "uploadPan") {
+    console.log(`hello
+${tablinks}
+
+${tabcontent.length}`);
+
+    clearInterval(autoImageInterval);
+    if (stream !== undefined) {
+      video.pause();
+      video.src = "";
+      stream.getTracks().forEach((track) => track.stop());
+    }
+    document.getElementById("canvas").style.display = "block";
+    document.getElementById(tablinks).style.borderWidth = "thick";
+    //    console.log("clicked" + tablinks);
+  } else if (tablinks == "autoImagePan") {
+    if (stream !== undefined) {
+      video.pause();
+      video.src = "";
+      stream.getTracks().forEach((track) => track.stop());
+    }
+    document.getElementById("autoImage").style.display = "block";
+    autoImageInterval = setInterval(() => autoImageUploader(), 12000);
+  }
+}
+
 function setup() {
   video = document.getElementById("video");
   canvas = document.getElementById("canvas");
@@ -63,8 +116,9 @@ function setup() {
         console.log("model is not loading" + e);
       });
   }
+  console.log("stream" + stream);
   main();
-  setInterval(() => autoImageUploader(), 12000);
+  autoImageInterval = setInterval(() => autoImageUploader(), 12000);
 }
 async function loadModel() {
   loadPre.innerHTML = "Model loading...again";
@@ -168,8 +222,8 @@ async function autoImageUploader(e) {
   // t = autoImage;
   // const r = await model.classify(t);
   //console.info("from auto load" + r);
-  console.info(r);
-  delete t;
+
+  //delete t;
 
   // setTimeout(
   //   model.classify(autoImage).then((r) => console.log(r)),
@@ -183,8 +237,8 @@ async function handleImageUpload(e) {
     let context = canvas.getContext("2d");
     var img = new Image();
     img.onload = function () {
-      canvas.width = img.width;
-      canvas.height = img.height;
+      canvas.width = 250;
+      canvas.height = 250;
       context.drawImage(img, 0, 0);
     };
     img.src = event.target.result;

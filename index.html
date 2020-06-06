@@ -12,6 +12,7 @@
   <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.0.1"> </script>
   <!-- Load the MobileNet model. -->
   <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet@1.0.0"> </script>
+  
    <style>
     * {
       box-sizing: border-box;
@@ -21,8 +22,8 @@
   background:blue;
   
  position: fixed;
- 
-  left: -110px;
+ width:200px;
+  left: -180px;
   transition: 0.3s;
   padding: 15px;
   
@@ -46,6 +47,8 @@
   background-color: black;
   left: 0;
 }
+
+
 button{
   background-color: transparent;
   color:white;
@@ -57,7 +60,9 @@ body {
   font-family:Helvetica,Arial,sans-serif;
    background: url(https://wpamelia.com/wp-content/uploads/2019/02/background-black-colors-952670.jpg) repeat;
   
-  color:#fff;
+  margin:0px;
+  
+  
 }
 
     .first {
@@ -124,7 +129,8 @@ body {
     }
 
     .wrapper {
-     
+           
+       padding: 0px;
       font: 1.2em Helvetica, arial, sans-serif;
       display: grid;
       grid-template-columns: 1fr 7fr;
@@ -135,6 +141,7 @@ body {
         "result result";
     }
   </style>
+  
   <title>Object Identification</title>
 </head>
 
@@ -154,33 +161,36 @@ body {
     </div>
 
     <div id="mySidenav">
-      <div style=" top:90px;">
-        Open Camera
-        <button id="startCamera" style="float:right;" onclick="startCamera()"> &#x1f4f7;
-        </button>
+      <div id="autoImagePan" style=" top:180px; background-color:IndianRed">Image
+        <label onclick="openPage('autoImagePan')" style="float:right">🖼️</label>
+
       </div>
-      <div style=" top:220px;">
-        <label class="myFile">
-          Upload Images &#128447; <input input id="imageUpload" type="file" />
+      <div id="cameraPan" style=" top:380px;background-color:MediumSeaGreen">
+        Open Camera
+        <label id="startCamera" style="float:right;" onclick="openPage('cameraPan');startCamera()"> &#x1f4f7;
+        </label>
+      </div>
+      <div id="uploadPan" style=" top:280px;background-color:DodgerBlue" onclick="openPage('uploadPan')">Upload Images
+        <label class="myFile" style="float:right">
+          🗂️ <input input id="imageUpload" type="file" />
         </label>
 
       </div>
     </div>
-    <div class="side">
 
-    </div>
+    <div id="content">
 
-    <div class="content">
-      <img id="autoImage" src="https://i.picsum.photos/id/274/500/500.jpg" crossorigin="anonymous" onclick="autoImageUploader()">
+      <img id="autoImage" class="content" src="https://i.picsum.photos/id/274/500/500.jpg" crossorigin="anonymous" onclick="autoImageUploader()">
 
-      <video id="video">Video stream not available.</video>
+      <video id="video" class="content" style="border:3px yellow solid">Video stream not available.</video>
 
-      <canvas id="canvas">
+      <canvas id="canvas" class="content" style="border:3px blue solid">
       </canvas>
     </div>
+
     <div class="result">
       <button id="predictButton" onclick="predictToggle()">Start Predicting </button>
-      <pre styl="font-family: 'Bungee Inline', cursive; " id="predictions">Predictions</pre>
+      <pre style="font-family: 'Bungee Inline', cursive; color:white; " id="predictions">Predictions</pre>
       <button onclick="showDetails()">Show Details
       </button>
       <button id="speakButton" onclick="speakingToggle() "> Speak

@@ -108,8 +108,9 @@ function setup() {
         model = result;
         loadPre.innerHTML = "model loaded";
 
-        document.getElementsByClassName("first")[0].style.backgroundColor =
-          "green";
+        // document.getElementsByClassName(
+        //   "first"
+        // )[0].style.backgroundColor = rgba(255, 255, 255, 0.2);
       })
       .catch((e) => {
         loadPre.innerHTML = "Model failed to load";

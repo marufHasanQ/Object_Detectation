@@ -4,7 +4,7 @@
 
 <head>
   <script src="./script.js"></script>
-
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <meta charset="UTF-8" />
   <link href="https://fonts.googleapis.com/css2?family=Aldrich&family=Amatic+SC:wght@700&family=Audiowide&family=Bungee+Inline&display=swap" rel="stylesheet">
   <!-- Load TensorFlow.js. This is required to use MobileNet. -->
@@ -12,18 +12,38 @@
   <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.0.1"> </script>
   <!-- Load the MobileNet model. -->
   <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet@1.0.0"> </script>
-  
    <style>
+
+
     * {
       box-sizing: border-box;
     }
-
+.text{
+   display:inline;
+    background:linear-gradient(
+        45deg,
+        #CA4246 16.666%, 
+        #E16541 16.666%, 
+        #E16541 33.333%, 
+        #F18F43 33.333%, 
+        #F18F43 50%, 
+        #8B9862 50%, 
+        #8B9862 66.666%, 
+        #476098 66.666%, 
+        #476098 83.333%, 
+        #A7489B 83.333%);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+  font-size: 5vw;
+	font-family	: sans-serif;
+	
+}
 #mySidenav div{
-  
+  background:blue;
   
  position: fixed;
  width:200px;
-  left: -157px;
+  left: -155px;
   transition: 0.3s;
   padding: 15px;
   
@@ -52,6 +72,7 @@
 button{
   background-color: transparent;
   color:white;
+  cursor:pointer;
 }
 
 
@@ -66,7 +87,12 @@ body {
 }
 
     .first {
-      background-color: grey;
+      background-color: rgba(255, 255, 255, 0.1);
+       backdrop-filter: blur(5px); 
+      border:1px solid black;
+      
+      border-radius:0px  0px 5px 5px;
+      
       grid-area: first;
       display: grid;
       grid-template-columns: repeat(6, 1fr);
@@ -84,7 +110,7 @@ body {
     margin: 10% auto;
   width:80%;
   height:30%;
-  border: 7px solid white;
+  border: 7px solid grey;
   
   border-radius: 15px;
      
@@ -92,9 +118,20 @@ body {
      
   
 }
+#wikipages {
+  
+  border: 4px solid white;
+  margin:5px;
+  
+  border-radius: 15px;
+     
+}
     .main-head {
       grid-area: header;
       background-color:#1e1f26;
+      display:inline;
+     border-left:25px solid orange;
+      
     }
 
     .content {
@@ -141,22 +178,25 @@ body {
         "result result";
     }
   </style>
-  
   <title>Object Identification</title>
 </head>
 
 <body onload="setup()">
   <div style="text-align:center" class="wrapper">
     <div class="main-head">
-      <h1>
-        বস্তু চিহ্নিতকরণ
+
+      <i class="fa fa-cog fa-spin fa-3x fa-fw" style="font-size:58px;color:white;float:left;display:inline;"></i>
+
+      <h1 class="text">
+        Object Identification
+
       </h1>
     </div>
     <div class="first" id="first">
-      <pre id="loadPre">
+      <pre id="loadPre" color="white">
       মডেল লোড হচ্ছে... 
       </pre>
-      <button style='font-size:50' onclick="loadModel()">&#128472;
+      <button style='font-size:50; border:0.5px solid black;cursor:pointer' onclick="loadModel()">&#128472;
       </button>
     </div>
 

@@ -12,7 +12,7 @@
   <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.0.1"> </script>
   <!-- Load the MobileNet model. -->
   <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet@1.0.0"> </script>
-   <style>
+	 <style>
 
 
     * {
@@ -82,6 +82,7 @@ body {
    background: url(https://wpamelia.com/wp-content/uploads/2019/02/background-black-colors-952670.jpg) repeat;
   
   margin:0px;
+  width:100%
   
   
 }
@@ -97,7 +98,11 @@ body {
       display: grid;
       grid-template-columns: repeat(6, 1fr);
     }
-
+.result button{
+  width:150px;
+  height:50px;
+  border:2px solid grey;
+}
     #loadPre {
       text-align: center;
 
@@ -118,10 +123,37 @@ body {
      
   
 }
+
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 4px solid #888;
+  width: 80%;
+}
 #wikipages {
+  position:relative;
+  left:40px;
+   width:90% ;
+   height:500px; 
+  border: 4px solid grey;
+  margin: 30px  ;
   
-  border: 4px solid white;
-  margin:5px;
   
   border-radius: 15px;
      
@@ -182,10 +214,21 @@ body {
 </head>
 
 <body onload="setup()">
+
+  <div id="myModal" class="modal">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+
+      <p>This Project is developed by</br><b>Maruf</b>
+        </br><b>Maruf</b> </p>
+      </br><b>Maruf</b>
+    </div>
+  </div>
   <div style="text-align:center" class="wrapper">
     <div class="main-head">
 
-      <i class="fa fa-cog fa-spin fa-3x fa-fw" style="font-size:58px;color:white;float:left;display:inline;"></i>
+      <i class="fa fa-cog fa-spin fa-3x fa-fw" id="modalButton" style="font-size:58px;color:white;float:left;display:inline;color:rgb(51, 153, 102)"></i>
 
       <h1 class="text">
         Object Identification
@@ -222,15 +265,19 @@ body {
 
       <img id="autoImage" class="content" src="https://i.picsum.photos/id/274/500/500.jpg" crossorigin="anonymous" onclick="autoImageUploader()">
 
-      <video id="video" class="content" style="border:3px yellow solid">Video stream not available.</video>
-
-      <canvas id="canvas" class="content" style="border:3px blue solid">
+      <video id="video" class="content" style="">Video stream not available.</video>
+      <canvas id="canvas" class="content" style="margin:auto">
       </canvas>
+
     </div>
 
     <div class="result">
       <button id="predictButton" onclick="predictToggle()">Start Predicting </button>
-      <pre style="font-family: 'Bungee Inline', cursive; color:white; " id="predictions">Predictions</pre>
+      <div style="display: inline; ">
+
+        <pre style="font-family: 'Bungee Inline', cursive; color:white; " id="predictions">Predictions</pre>
+      </div>
+
       <button onclick="showDetails()">Show Details
       </button>
       <button id="speakButton" onclick="speakingToggle() "> Speak
@@ -239,7 +286,7 @@ body {
     </div>
 
   </div>
-  <iframe id="wikipages" width="100%" height="500px"></iframe>
+  <iframe id="wikipages"></iframe>
 </body>
 
 </html>

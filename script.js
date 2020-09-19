@@ -13,6 +13,11 @@ let autoImage;
 let speakButton;
 let speakFlag = true;
 let autoImageInterval;
+let autoSpnapshotInterval;
+let modal;
+
+// Get the button that opens the modal
+let modalbtn;
 //const startCameraButton;
 let count = 0;
 //let img = [];
@@ -54,9 +59,10 @@ ${tabcontent.length}`);
       stream.getTracks().forEach((track) => track.stop());
     }
     document.getElementById("canvas").style.display = "block";
-    document.getElementById(tablinks).style.borderWidth = "thick";
+    //document.getElementById(tablinks).style.borderWidth = "thick";
     //    console.log("clicked" + tablinks);
   } else if (tablinks == "autoImagePan") {
+    clearInterval(autoSpnapshotInterval);
     if (stream !== undefined) {
       video.pause();
       video.src = "";
@@ -77,6 +83,17 @@ function setup() {
   wikipages = document.getElementById("wikipages");
   autoImage = document.getElementById("autoImage");
   speakButton = document.getElementById("speakButton");
+  modal = document.getElementById("myModal");
+  modalbtn = document.getElementById("modalButton");
+  modalbtn.onclick = function () {
+    modal.style.display = "block";
+  };
+
+  window.onclick = function (event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  };
 
   console.log(autoImage);
 
@@ -106,7 +123,7 @@ function setup() {
       .load()
       .then((result) => {
         model = result;
-        loadPre.innerHTML = "model loaded";
+        loadPre.innerHTML = "Model Loaded";
 
         // document.getElementsByClassName(
         //   "first"
@@ -233,17 +250,18 @@ async function autoImageUploader(e) {
 }
 async function handleImageUpload(e) {
   var reader = new FileReader();
-  reader.readAsDataURL(e.target.files[0]);
+
   reader.onload = function (event) {
     let context = canvas.getContext("2d");
     var img = new Image();
     img.onload = function () {
       canvas.width = 250;
       canvas.height = 250;
-      context.drawImage(img, 0, 0);
+      context.drawImage(img, 0, 0, 250, 250);
     };
     img.src = event.target.result;
   };
+  reader.readAsDataURL(e.target.files[0]);
   const r = await model.classify(canvas);
   console.log(r);
 
@@ -302,5 +320,5 @@ async function startCamera() {
     console.log(err);
   }
 
-  setInterval(() => takeSnapshot(), 3000);
+  autoSpnapshotInterval = setInterval(() => takeSnapshot(), 3000);
 }

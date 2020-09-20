@@ -1,6 +1,6 @@
  <style>
 
-
+@import "background.css"; 
     * {
       box-sizing: border-box;
     }

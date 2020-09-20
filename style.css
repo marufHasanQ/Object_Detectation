@@ -6,6 +6,7 @@
     }
 .text{
    display:inline;
+    
     background:linear-gradient(
         45deg,
         #CA4246 16.666%, 
@@ -29,7 +30,7 @@
   
  position: fixed;
  width:200px;
-  left: -155px;
+  left: -168px;
   transition: 0.3s;
   padding: 15px;
   
@@ -65,7 +66,7 @@ button{
 
 body {
   font-family:Helvetica,Arial,sans-serif;
-   background: url(https://wpamelia.com/wp-content/uploads/2019/02/background-black-colors-952670.jpg) repeat;
+/*    background: url(https://wpamelia.com/wp-content/uploads/2019/02/background-black-colors-952670.jpg) repeat; */
   
   margin:0px;
   width:100%
@@ -149,6 +150,9 @@ body {
       background-color:#1e1f26;
       display:inline;
      border-left:25px solid orange;
+      height:90px;
+     
+   
       
     }
 
@@ -195,4 +199,67 @@ body {
         "content content"
         "result result";
     }
+
+
+
+/*
+
+
+
+
+
+.card {
+  
+  position: relative;
+ 
+ 
+
+  animation: rotate 1s linear infinite;
+  animation-play-state: paused;
+ 
+
+  animation-iteration-count: 1;
+  animation-fill-mode: both;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  width: 70%;
+  background:black;
+  color:white;
+}
+
+@keyframes rotate {
+  to {
+    right:-40%;
+    
+  }
+}
+
+
+
+
+
+
+
+.card:hover {
+  box-shadow: 0 48px 16px 0 rgba(0,0,0,0.2);
+  background:darkgrey;
+}
+
+.container {
+  padding: 10px 100px  10px 10px;
+}
+
+
+
+
+
+
+
+
+ */
+
   </style>
+
+
+
+

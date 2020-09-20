@@ -22,6 +22,20 @@ let modalbtn;
 let count = 0;
 //let img = [];
 
+window.addEventListener(
+  "scroll",
+  () => {
+    document.body.style.setProperty(
+      "--scroll",
+      window.pageYOffset / (document.body.offsetHeight - window.innerHeight)
+    );
+    console.log(
+      window.pageYOffset / (document.body.offsetHeight - window.innerHeight)
+    );
+  },
+  false
+);
+
 function openPage(element) {
   let tablinks = element;
 
@@ -222,7 +236,7 @@ async function autoImageUploader(e) {
   //   } else {
 
   //   }
-  autoImage.src = "https://picsum.photos/id/" + (count + 250) + "/500";
+  autoImage.src = "https://picsum.photos/id/" + (count + 300) + "/500";
   //   autoImage.setAttribute("crossOrigin", "anonymous");
 
   //   setTimeout(() => {}, 2000);

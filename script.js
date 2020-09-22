@@ -62,7 +62,7 @@ ${tabcontent.length}`);
     //   "Capturing video feed from the device camera and object are identified in real-time ";
     document.getElementById("video").style.display = "block";
     document.getElementById("canvas").style.display = "block";
-     document.getElementById("predictButton").style.display = "inline";
+    document.getElementById("predictButton").style.display = "inline";
 
     //    console.log("clicked" + tablinks);
   } else if (tablinks == "uploadPan") {
@@ -203,7 +203,6 @@ function speakingToggle() {
   // }
   console.log("speakButton" + speakButton);
 
-  
   if (speakFlag) {
     responsiveVoice.speak("muting");
     speakButton.innerHTML = "Speak";
@@ -246,7 +245,7 @@ async function autoImageUploader(e) {
   //   } else {
 
   //   }
-  autoImage.src = "https://picsum.photos/id/" + (count + 300) + "/500";
+  autoImage.src = "https://picsum.photos/id/" + (count + 362) + "/500";
   //   autoImage.setAttribute("crossOrigin", "anonymous");
 
   //   setTimeout(() => {}, 2000);

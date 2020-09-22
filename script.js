@@ -39,7 +39,7 @@ window.addEventListener(
 function openPage(element) {
   let tablinks = element;
 
-  let tabcontent = document.getElementsByClassName("content");
+  let tabcontent = document.getElementsByClassName("ccontent");
   console.log("tab length" + tabcontent.length);
   //   document.getElementById('cameraPan').style.backgroundColor = "DodgerBlue";
   //   document.getElementById('uploadPan').style.backgroundColor = "MediumSeaGreen
@@ -49,6 +49,8 @@ function openPage(element) {
     tabcontent[i].style.display = "none";
   }
 
+  // document.getElementById("explanation").style.display = "block";
+
   if (tablinks == "cameraPan") {
     console.log(`hello
 ${tablinks}
@@ -56,8 +58,11 @@ ${tablinks}
 ${tabcontent.length}`);
 
     clearInterval(autoImageInterval);
+    // document.getElementById("explanation").innerHTML =
+    //   "Capturing video feed from the device camera and object are identified in real-time ";
     document.getElementById("video").style.display = "block";
     document.getElementById("canvas").style.display = "block";
+     document.getElementById("predictButton").style.display = "inline";
 
     //    console.log("clicked" + tablinks);
   } else if (tablinks == "uploadPan") {
@@ -72,7 +77,10 @@ ${tabcontent.length}`);
       video.src = "";
       stream.getTracks().forEach((track) => track.stop());
     }
-    document.getElementById("canvas").style.display = "block";
+
+    // document.getElementById("explanation").innerHTML =
+    //   "Object on the uploaded still image is predicted";
+    // document.getElementById("canvas").style.display = "block";
     //document.getElementById(tablinks).style.borderWidth = "thick";
     //    console.log("clicked" + tablinks);
   } else if (tablinks == "autoImagePan") {
@@ -97,8 +105,9 @@ function setup() {
   wikipages = document.getElementById("wikipages");
   autoImage = document.getElementById("autoImage");
   speakButton = document.getElementById("speakButton");
+
   modal = document.getElementById("myModal");
-  modalbtn = document.getElementById("modalButton");
+  modalbtn = document.getElementsByClassName("container");
   modalbtn.onclick = function () {
     modal.style.display = "block";
   };
@@ -269,13 +278,14 @@ async function handleImageUpload(e) {
     let context = canvas.getContext("2d");
     var img = new Image();
     img.onload = function () {
-      canvas.width = 250;
-      canvas.height = 250;
-      context.drawImage(img, 0, 0, 250, 250);
+      canvas.width = 550;
+      canvas.height = 550;
+      context.drawImage(img, 0, 0, 550, 550);
     };
     img.src = event.target.result;
   };
   reader.readAsDataURL(e.target.files[0]);
+  document.getElementById("canvas").style.display = "block";
   const r = await model.classify(canvas);
   console.log(r);
 

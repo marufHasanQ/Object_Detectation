@@ -115,7 +115,8 @@ body {
 #autoImage{
    
     
-    margin: 10% auto;
+    margin: 10% ;
+  margin-left:-5%;
   width:80%;
   height:30%;
   border: 7px solid grey;
@@ -129,6 +130,7 @@ body {
 
 #explanation{
   color:white;
+  margin-left:-16%;
 }
 
 .modal {
@@ -245,6 +247,7 @@ body {
 }
 .container {
   padding: 10px 100px  10px 10px;
+  font-family:Average Serif Font;
 }
 
 

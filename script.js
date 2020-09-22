@@ -197,20 +197,21 @@ function displayPredictions(predictions) {
   speakPrediction(predictions[0].className);
 }
 function speakingToggle() {
-  if (predictions == undefined) {
-    responsiveVoice.speak("start predicting first");
-    return 0;
-  }
+  // if (predictions == undefined) {
+  //   responsiveVoice.speak("start predicting first");
+  //   return 0;
+  // }
   console.log("speakButton" + speakButton);
 
-  speakFlag = !speakFlag;
+  
   if (speakFlag) {
     responsiveVoice.speak("muting");
-    speakButton.innerHTML = "mute";
+    speakButton.innerHTML = "Speak";
   } else {
     responsiveVoice.speak("speaking");
-    speakButton.innerHTML = "speak";
+    speakButton.innerHTML = "Mute";
   }
+  speakFlag = !speakFlag;
 }
 
 function speakPrediction(speaking_word) {
@@ -346,4 +347,3 @@ async function startCamera() {
 
   autoSpnapshotInterval = setInterval(() => takeSnapshot(), 3000);
 }
-

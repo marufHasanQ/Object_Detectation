@@ -346,3 +346,4 @@ async function startCamera() {
 
   autoSpnapshotInterval = setInterval(() => takeSnapshot(), 3000);
 }
+

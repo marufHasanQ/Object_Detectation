@@ -4,6 +4,16 @@
     * {
       box-sizing: border-box;
     }
+#video , #canvas{
+  border: 7px solid grey;
+  padding:10px;
+  margin-left:15%;
+  margin-top:5%;
+  left:100px;
+/*   margin-left:15%; */
+  display: none;
+  
+}
 .text{
    display:inline;
   padding-top:20px;
@@ -51,6 +61,10 @@
    */
 }
 
+
+
+
+
 #mySidenav div:hover{
   background-color: black;
   left: 0;
@@ -67,7 +81,7 @@ button{
 
 body {
   font-family:Helvetica,Arial,sans-serif;
-/*    background: url(https://wpamelia.com/wp-content/uploads/2019/02/background-black-colors-952670.jpg) repeat; */
+    /*    background: url(https://wpamelia.com/wp-content/uploads/2019/02/background-black-colors-952670.jpg) repeat; */
   
   margin:0px;
   width:100%
@@ -79,6 +93,7 @@ body {
       background-color: rgba(255, 255, 255, 0.1);
        backdrop-filter: blur(5px); 
       border:1px solid black;
+      color :white;
       
       border-radius:0px  0px 5px 5px;
       
@@ -110,6 +125,10 @@ body {
 
      
   
+}
+
+#explanation{
+  color:white;
 }
 
 .modal {
@@ -162,6 +181,8 @@ body {
 
     .content {
       grid-area: content;
+      padding:10px;
+      
     
     }
 
@@ -211,8 +232,10 @@ body {
 
 
 .card{
-  width:55%;
-  left:35%;
+  width:90%;
+/*   height:150Px;  */
+  
+   left:0%; 
   position:relative;
   color:grey;
   
@@ -309,7 +332,7 @@ html {
 #stars:after {
   content: " ";
   position: absolute;
-  top: 2000px;
+  top: 3000px;
   width: 1px;
   height: 1px;
   background: transparent;
@@ -326,7 +349,7 @@ html {
 #stars2:after {
   content: " ";
   position: absolute;
-  top: 2000px;
+  top: 3000px;
   width: 2px;
   height: 2px;
   background: transparent;
@@ -343,7 +366,7 @@ html {
 #stars3:after {
   content: " ";
   position: absolute;
-  top: 2000px;
+  top: 3000px;
   width: 3px;
   height: 3px;
   background: transparent;
